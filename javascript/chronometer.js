@@ -1,34 +1,67 @@
 class Chronometer {
   constructor() {
-    // ... your code goes here
+    this.currentTime = 0;
+    this.intervalId = null;
   }
 
   start(callback) {
-    // ... your code goes here
+    this.intervalId = setInterval(() => {
+      this.currentTime++;
+      if (callback) callback();
+    }, 1000);
   }
 
   getMinutes() {
-    // ... your code goes here
+    return Math.floor(this.currentTime / 60);
   }
 
   getSeconds() {
-    // ... your code goes here
+    return this.currentTime % 60;
+  }
+
+  getMilliseconds() {
+    return this.currentTime * 1000 + this.currentMilliseconds;
   }
 
   computeTwoDigitNumber(value) {
-    // ... your code goes here
+    let valueString = String(value);
+    if (valueString.length === 1) {
+      valueString = '0' + valueString;
+      // console.log(valueString);
+      return valueString;
+    } else {
+      // console.log(valueString);
+      return valueString;
+    }
   }
 
   stop() {
-    // ... your code goes here
+    clearInterval(this.intervalId);
   }
 
   reset() {
-    // ... your code goes here
+    // console.log(this.currentTime);
+    this.currentTime = 0;
+    // console.log(this.currentTime);
+    const minDec = document.querySelector('#minDec');
+    const minUni = document.querySelector('#minUni');
+    const secDec = document.querySelector('#secDec');
+    const secUni = document.querySelector('#secUni');
+    const milDec = document.querySelector('#milDec');
+    const milUni = document.querySelector('#milUni');
+    minDec.innerHTML = '0';
+    minUni.innerHTML = '0';
+    secDec.innerHTML = '0';
+    secUni.innerHTML = '0';
+    milDec.innerHTML = '0';
+    milUni.innerHTML = '0';
   }
 
   split() {
-    // ... your code goes here
+    const minutes = this.getMinutes();
+    const seconds = this.getSeconds();
+
+    return `${this.computeTwoDigitNumber(minutes)}:${this.computeTwoDigitNumber(seconds)}`;
   }
 }
 
